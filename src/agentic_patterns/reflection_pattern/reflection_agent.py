@@ -1,14 +1,11 @@
 from colorama import Fore
-from dotenv import load_dotenv
-from groq import Groq
+from ollama import Client
 
 from agentic_patterns.utils.completions import build_prompt_structure
 from agentic_patterns.utils.completions import completions_create
 from agentic_patterns.utils.completions import FixedFirstChatHistory
 from agentic_patterns.utils.completions import update_chat_history
 from agentic_patterns.utils.logging import fancy_step_tracker
-
-load_dotenv()
 
 
 BASE_GENERATION_SYSTEM_PROMPT = """
@@ -32,11 +29,11 @@ class ReflectionAgent:
 
     Attributes:
         model (str): The model name used for generating and reflecting on responses.
-        client (Groq): An instance of the Groq client to interact with the language model.
+        client (Ollama): An instance of the Ollama client to interact with the language model.
     """
 
-    def __init__(self, model: str = "llama-3.3-70b-versatile"):
-        self.client = Groq()
+    def __init__(self, model: str = "llama3.1:latest"):
+        self.client = Client()
         self.model = model
 
     def _request_completion(
@@ -47,7 +44,7 @@ class ReflectionAgent:
         log_color: str = "",
     ):
         """
-        A private method to request a completion from the Groq model.
+        A private method to request a completion from the Ollama model.
 
         Args:
             history (list): A list of messages forming the conversation or reflection history.
