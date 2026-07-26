@@ -10,7 +10,7 @@ def get_fn_signature(fn: Callable) -> dict:
         fn (Callable): The function whose signature needs to be extracted.
 
     Returns:
-        dict: A dictionary containing the function's name, description,
+        dict: A dictionary containing the function's name, description,,
               and parameter types.
     """
     fn_signature: dict = {
